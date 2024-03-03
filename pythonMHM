@@ -1,0 +1,24 @@
+class MinitermGenerator:
+    def __init__(self, predicates):
+        self.predicates = predicates
+
+    def generate_horizontal_miniterms(self):
+        miniterms = []
+        for predicate in self.predicates:
+            miniterm = " AND ".join([f"{attr} = {value}" for attr, value in predicate.items()])
+            miniterms.append(miniterm)
+        horizontal_miniterm = " OR ".join(miniterms)
+        return horizontal_miniterm
+
+
+# Example usage
+predicates_list = [
+    {"color": "red", "size": "small"},
+    {"color": "blue"},
+    {"color": "green", "price": "$20", "category": "electronics"},
+]
+
+miniterm_gen = MinitermGenerator(predicates_list)
+horizontal_miniterms = miniterm_gen.generate_horizontal_miniterms()
+
+print(horizontal_miniterms)
